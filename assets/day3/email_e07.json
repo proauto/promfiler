@@ -8,13 +8,13 @@
   },
   "receiver": "프로파일링센터",
   "timestamp": "2025-10-30T11:20:00",
-  "subject": "⚠️ 충격 - 횡령 사건 발각 (용의자 3명 모두 연루)",
+  "subject": "횡령 사건 발각",
   "importance": 5,
   "isUrgent": true,
   "hasAttachments": true,
   "attachmentCount": 2,
   "body": {
-    "urgentNotice": "⚠️ 충격: 용의자 3명 모두 피해자와 금전 문제 있음!",
+    "urgentNotice": "용의자 2명 횡령 사건과 연루",
     "sections": [
       {
         "title": "수사 배경",
@@ -34,7 +34,7 @@
           "  - 피해자 강민호: 100억 (케이맨 제도)",
           "  - 김수현: 30억 (스위스 계좌)",
           "",
-          "⚠️ 2024.09 외부 감사에서 발각",
+          "⚠️ 2024.10 외부 감사에서 발각",
           ""
         ]
       },
@@ -46,7 +46,8 @@
           "  - 'PJ Tech Solutions'",
           "  - 'Vision Partners'",
           "  - 'Smart Dev Korea'",
-          "금액: 총 100억원 (케이맨 제도 비자금)",
+          "금액: 총 100억원 (케이맨 제도 비자금)",  
+          "⚠️ 2024.10 외부 감사에서 발각",        
           ""
         ]
       }

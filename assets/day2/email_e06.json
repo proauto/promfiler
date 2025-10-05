@@ -1,0 +1,63 @@
+{
+  "id": "E06",
+  "day": 2,
+  "sender": {
+    "name": "정수진 수사관",
+    "department": "약물추적팀",
+    "specialization": "의약품 불법 유통"
+  },
+  "receiver": "프로파일링센터",
+  "timestamp": "2025-10-29T18:15:00",
+  "subject": "디곡신 구매 경로 추적 - 합법 경로 없음",
+  "importance": 4,
+  "hasAttachments": true,
+  "attachmentCount": 1,
+  "hasEnhancedInvestigation": true,
+  "tokenCost": 20,
+  "body": {
+    "greeting": "디곡신 구매 경로를 추적했습니다.",
+    "sections": [
+      {
+        "title": "합법 경로 조사 결과",
+        "content": [
+          "전국 약국 처방 기록 조회 완료",
+          "",
+          "김수현: 처방 기록 없음",
+          "박준영: 처방 기록 없음",
+          "한지은: 처방 기록 없음",
+          "",
+          "결론: 3명 모두 합법적 구매 기록이 없습니다."
+        ]
+      },
+      {
+        "title": "불법 경로 가능성",
+        "content": [
+          "디곡신은 처방전이 필요한 전문의약품입니다.",
+          "하지만 불법으로 구할 수 있는 경로가 있습니다:",
+          "",
+          "1. 해외 직구 (처방전 불필요 국가)",
+          "2. 다크웹 구매",
+          "3. 타인 처방 도용",
+          "",
+          "현재 다크웹 사이트들을 추적 중입니다..."
+        ]
+      }
+    ],
+    "closing": "첨부된 약국 조회 결과를 확인해주세요. 보강 수사를 통해 다크웹 경로를 추적할 수 있습니다.",
+    "hint": "⚠️ 보강 수사: 다크웹 'MedsDirect' 사이트 추적, 비트코인 결제 내역, 배송 기록 확보"
+  },
+  "attachments": [
+    {
+      "filename": "약물조회_결과.xlsx",
+      "type": "application/vnd.ms-excel",
+      "size": "234 KB",
+      "assetId": "e06_attach_01"
+    }
+  ],
+  "enhancedInvestigation": {
+    "available": true,
+    "description": "다크웹 MedsDirect 사이트 추적 / 비트코인 결제 추적",
+    "tokenCost": 20,
+    "additionalFiles": 3
+  }
+}

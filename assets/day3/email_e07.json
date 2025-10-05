@@ -1,0 +1,68 @@
+{
+  "id": "E07",
+  "day": 3,
+  "sender": {
+    "name": "강민석 수사관",
+    "department": "금융조사팀",
+    "specialization": "횡령 및 배임"
+  },
+  "receiver": "프로파일링센터",
+  "timestamp": "2025-10-30T11:20:00",
+  "subject": "⚠️ 충격 - 횡령 사건 발각 (용의자 3명 모두 연루)",
+  "importance": 5,
+  "isUrgent": true,
+  "hasAttachments": true,
+  "attachmentCount": 2,
+  "body": {
+    "urgentNotice": "⚠️ 충격: 용의자 3명 모두 피해자와 금전 문제 있음!",
+    "sections": [
+      {
+        "title": "수사 배경",
+        "content": [
+          "VisionTech 회계 장부 압수 수색",
+          "외부 감사 자료 확보",
+          "은행 계좌 추적",
+          "결과: 대규모 횡령 발견"
+        ]
+      },
+      {
+        "title": "사건 1 - 김수현 횡령 (30억)",
+        "content": [
+          "기간: 2020-2024 (4년간)",
+          "수법: 가짜 외주업체 'K&K솔루션' 설립",
+          "금액: 총 130억원",
+          "  - 피해자 강민호: 100억 (케이맨 제도)",
+          "  - 김수현: 30억 (스위스 계좌)",
+          "",
+          "⚠️ 2024.09 외부 감사에서 발각",
+          ""
+        ]
+      },
+      {
+        "title": "사건 2 - 박준영 횡령 (100억)",
+        "content": [
+          "기간: 2020-2024 (4년간)",
+          "수법: 가짜 외주업체 3곳 설립",
+          "  - 'PJ Tech Solutions'",
+          "  - 'Vision Partners'",
+          "  - 'Smart Dev Korea'",
+          "금액: 총 100억원 (케이맨 제도 비자금)",
+          ""
+        ]
+      }
+    ],
+    "closing": "첨부된 횡령 상세 내역을 확인하세요. 두 사람 모두 절박한 상황이었습니다. 혹시 관련 자료가 있는지 보강수사 가능합니다.",
+    "evidence": [
+      "횡령 증거: 은행 계좌, 해외 송금 기록",
+      "증언: 외부 감사팀, 회계사"
+    ]
+  },
+  "attachments": [
+    {
+      "filename": "횡령_상세내역.xlsx",
+      "type": "application/vnd.ms-excel",
+      "size": "1.8 MB",
+      "assetId": "e07_attach_01"
+    }
+  ]
+}

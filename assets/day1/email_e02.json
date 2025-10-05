@@ -1,0 +1,71 @@
+{
+  "id": "E02",
+  "day": 1,
+  "sender": {
+    "name": "김태형 수사관",
+    "department": "강남서 과학수사팀",
+    "specialization": "현장 분석"
+  },
+  "receiver": "프로파일링센터",
+  "timestamp": "2025-10-28T14:20:00",
+  "subject": "현장 밀실 구조 분석 - 외부 침입 불가 판정",
+  "importance": 4,
+  "hasAttachments": true,
+  "attachmentCount": 2,
+  "hasEnhancedInvestigation": true,
+  "tokenCost": 20,
+  "body": {
+    "greeting": "서재 현장을 정밀 조사했습니다.",
+    "sections": [
+      {
+        "title": "밀실 구조 확인",
+        "content": [
+          "완벽한 밀실 상황입니다.",
+          "문: 1개 (데드볼트, 내부에서만 잠금 가능)",
+          "창문: 2개 (남쪽, 동쪽 모두 내부 잠금)",
+          "높이: 지상 5.2m (2층)",
+          "외부 침입: 불가능해 보임"
+        ]
+      },
+      {
+        "title": "잠금장치 상태",
+        "content": [
+          "문 데드볼트: 잠김 상태 (손상 없음)",
+          "남쪽 창문: 잠금 확인 (손상 없음)",
+          "동쪽 창문: 잠금 확인 (손상 없음)",
+          "모든 잠금장치는 내부에서만 조작 가능"
+        ]
+      },
+      {
+        "title": "현재 판단",
+        "content": [
+          "자연사 가능성 높음",
+          "외부 침입 흔적 전무",
+          "그런데 한 가지 이상한 점이 있습니다..."
+        ]
+      }
+    ],
+    "closing": "첨부된 구조도를 확인하시고, 필요하시면 추가 조사를 요청해주세요.",
+    "hint": "⚠️ 보강 수사를 통해 정원 주변을 더 자세히 조사할 수 있습니다."
+  },
+  "attachments": [
+    {
+      "filename": "서재_구조도.pdf",
+      "type": "application/pdf",
+      "size": "890 KB",
+      "assetId": "e02_attach_01"
+    },
+    {
+      "filename": "현장사진_02-05.jpg",
+      "type": "image/jpeg",
+      "size": "5.1 MB",
+      "assetId": "e02_attach_02"
+    }
+  ],
+  "enhancedInvestigation": {
+    "available": true,
+    "description": "정원 주변 정밀 조사 / 1층 지붕 접근 가능성 검토 / 이웃 목격자 추가 조사",
+    "tokenCost": 20,
+    "additionalFiles": 3
+  }
+}

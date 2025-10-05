@@ -1,0 +1,706 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>증거-database</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(134, 131, 126, 1);
+	fill: rgba(134, 131, 126, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(63, 126, 190, 1);
+	fill: rgba(63, 126, 190, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 111, 200, 0.09);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(134, 131, 126, 1);
+	fill: rgba(134, 131, 126, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(63, 126, 190, 1);
+	fill: rgba(63, 126, 190, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(232, 242, 250, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 99, 174, 0.172); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="282faa34-f4d8-806c-8105-f0a7994baa68" class="page sans"><header><h1 class="page-title">증거-database</h1><p class="page-description"></p></header><div class="page-body"><h1 id="282faa34-f4d8-814c-93d2-f26882a4745a" class="">🔍 증거물 데이터베이스</h1><p id="282faa34-f4d8-815f-97ad-c62e0864a131" class=""><em>Notion Database로 Import하여 Gallery View로 사용</em></p><table id="282faa34-f4d8-8169-87d5-f6f787014ad4" class="simple-table"><thead class="simple-table-header"><tr id="282faa34-f4d8-8142-b383-c07caa65b014"><th id="pps|" class="simple-table-header-color simple-table-header">ID</th><th id="S\aP" class="simple-table-header-color simple-table-header">증거물명</th><th id="Y{`j" class="simple-table-header-color simple-table-header">유형</th><th id="dSCo" class="simple-table-header-color simple-table-header">발견일</th><th id="e}O;" class="simple-table-header-color simple-table-header">발견 장소</th><th id="T{kx" class="simple-table-header-color simple-table-header">중요도</th><th id="T~xk" class="simple-table-header-color simple-table-header">관련 용의자</th><th id="Ds=?" class="simple-table-header-color simple-table-header">의미</th><th id="nrKH" class="simple-table-header-color simple-table-header">상세 설명</th></tr></thead><tbody><tr id="282faa34-f4d8-8145-8675-cfae6643691c"><td id="pps|" class="">E001</td><td id="S\aP" class="">서재 밀실 구조</td><td id="Y{`j" class="">물리적 공간</td><td id="dSCo" class="">Day 1</td><td id="e}O;" class="">피해자 자택 2층 서재</td><td id="T{kx" class="">⭐⭐⭐⭐⭐</td><td id="T~xk" class="">한지은 (낚싯줄 트릭)</td><td id="Ds=?" class="">범행 방법의 핵심</td><td id="nrKH" class="">• 크기: 20평<br/>• 문: 1개 (데드볼트 내부 잠금)<br/>• 창문: 2개 (모두 내부 잠금)<br/>• 높이: 5.2m<br/>• Day 5: 낚싯줄 흔적 발견 → 트릭 해결</td></tr><tr id="282faa34-f4d8-817f-b49b-d073e3e4e5cc"><td id="pps|" class="">E002</td><td id="S\aP" class="">디곡신 + 와인</td><td id="Y{`j" class="">독극물 + 음료</td><td id="dSCo" class="">Day 2</td><td id="e}O;" class="">서재 책상 + 혈액</td><td id="T{kx" class="">⭐⭐⭐⭐⭐</td><td id="T~xk" class="">한지은 (마포구 배송)</td><td id="Ds=?" class="">사인 (심장마비 유발)</td><td id="nrKH" class="">• 혈중 농도: 3.2 ng/mL (중독!)<br/>• 섭취량: 약 10정<br/>• 와인: 샤또 마고 2019<br/>• Day 3: 다크웹 추적<br/>• Day 4: 마포구 배송 (한지은)<br/>• Day 5: 한지은 집 변기에서 1정!</td></tr><tr id="282faa34-f4d8-818e-88f8-d63a0163f6cb"><td id="pps|" class="">E003</td><td id="S\aP" class="">낚싯줄</td><td id="Y{`j" class="">도구 (밀실 트릭)</td><td id="dSCo" class="">Day 5</td><td id="e}O;" class="">서재 창문 + 한지은 집</td><td id="T{kx" class="">⭐⭐⭐⭐⭐</td><td id="T~xk" class="">한지은 (아버지 유품)</td><td id="Ds=?" class="">밀실 탈출 방법</td><td id="nrKH" class="">• 제조사: 시마노 PowerLine<br/>• 강도: 20파운드<br/>• 굵기: 0.2mm (투명)<br/>• 창문 잠금장치 흔적<br/>• 한지은 집에서 동일 제품 (2m 잘림)<br/>• 아버지 낚시 동호회 20년</td></tr><tr id="282faa34-f4d8-8160-aecc-f5996a64143d"><td id="pps|" class="">E004-1</td><td id="S\aP" class="">김수현 검색 기록</td><td id="Y{`j" class="">디지털 증거</td><td id="dSCo" class="">Day 4</td><td id="e}O;" class="">김수현 노트북</td><td id="T{kx" class="">⭐⭐⭐⭐</td><td id="T~xk" class="">김수현</td><td id="Ds=?" class="">범행 계획 의심</td><td id="nrKH" class="">• 10/24 (금) 23:47 &quot;디곡신 구매 방법&quot;<br/>• 10/24 (금) 23:52 &quot;해외 직구 처방전 없이&quot;<br/>• 10/24 (금) 23:58 &quot;심장마비 유발 약물&quot;<br/>• 해명: &quot;소설 쓰려고&quot;</td></tr><tr id="282faa34-f4d8-8136-a59e-fe4c878ef179"><td id="pps|" class="">E004-2</td><td id="S\aP" class="">김수현 이메일</td><td id="Y{`j" class="">디지털 증거</td><td id="dSCo" class="">Day 4</td><td id="e}O;" class="">김수현 이메일</td><td id="T{kx" class="">⭐⭐⭐⭐</td><td id="T~xk" class="">김수현</td><td id="Ds=?" class="">범행 의지 의심</td><td id="nrKH" class="">• 10/20 (토) 07:23 발신<br/>• &quot;오늘 밤 실행하기로 했어&quot;<br/>• 임시저장 (발송 안 됨)<br/>• 해명: &quot;소설 캐릭터 대사&quot;</td></tr><tr id="282faa34-f4d8-815c-8dd4-c279b59b1c4e"><td id="pps|" class="">E004-3</td><td id="S\aP" class="">김수현 해외 결제</td><td id="Y{`j" class="">금융 증거</td><td id="dSCo" class="">Day 4</td><td id="e}O;" class="">김수현 카드 내역</td><td id="T{kx" class="">⭐⭐⭐⭐</td><td id="T~xk" class="">김수현</td><td id="Ds=?" class="">디곡신 구매 의심</td><td id="nrKH" class="">• 9/30 결제 $147.50<br/>• 가맹점: &quot;OVERSEAS PHARM&quot;, 홍콩<br/>• 디곡신 가격과 유사<br/>• 해명: &quot;비타민&quot; (영수증 없음)</td></tr><tr id="282faa34-f4d8-819c-8951-faa32343a490"><td id="pps|" class="">E005</td><td id="S\aP" class="">발자국 (1층 지붕)</td><td id="Y{`j" class="">물리적 증거</td><td id="dSCo" class="">Day 4</td><td id="e}O;" class="">피해자 집 1층 지붕</td><td id="T{kx" class="">⭐⭐⭐⭐⭐</td><td id="T~xk" class="">한지은 (245mm 일치!)</td><td id="Ds=?" class="">침입 경로</td><td id="nrKH" class="">• 크기: 245mm<br/>• 김수현: 240mm (불일치)<br/>• 박준영: 270mm (불일치)<br/>• 한지은: 245mm (정확히 일치!)</td></tr><tr id="282faa34-f4d8-81e8-bf52-cfdade115bbe"><td id="pps|" class="">E006</td><td id="S\aP" class="">변기 속 디곡신</td><td id="Y{`j" class="">물리적 증거</td><td id="dSCo" class="">Day 5</td><td id="e}O;" class="">한지은 집 화장실</td><td id="T{kx" class="">⭐⭐⭐⭐⭐</td><td id="T~xk" class="">한지은</td><td id="Ds=?" class="">증거 인멸 실패</td><td id="nrKH" class="">• 압수수색 중 발견<br/>• 변기 물탱크 속<br/>• 디곡신 1정 (놓침!)<br/>• E002와 동일 제품</td></tr><tr id="282faa34-f4d8-8143-80e4-d91f09229c0b"><td id="pps|" class="">E007</td><td id="S\aP" class="">태운 로프 조각</td><td id="Y{`j" class="">물리적 증거</td><td id="dSCo" class="">Day 5</td><td id="e}O;" class="">한지은 집 베란다</td><td id="T{kx" class="">⭐⭐⭐⭐</td><td id="T~xk" class="">한지은</td><td id="Ds=?" class="">탈출 도구 증거</td><td id="nrKH" class="">• 베란다 화분 흙 속<br/>• 녹색 나일론 로프 조각 (3cm)<br/>• 불에 탄 흔적<br/>• 피해자 집 창문 섬유와 일치</td></tr><tr id="282faa34-f4d8-8175-95b8-faa5b15afcb0"><td id="pps|" class="">E008</td><td id="S\aP" class="">정원 소리 목격</td><td id="Y{`j" class="">증언</td><td id="dSCo" class="">Day 4</td><td id="e}O;" class="">피해자 집 이웃</td><td id="T{kx" class="">⭐⭐⭐</td><td id="T~xk" class="">한지은</td><td id="Ds=?" class="">침입 시각</td><td id="nrKH" class="">• 토요일 12:00경<br/>• 이웃: &quot;의자 끄는 소리 들었어요&quot;<br/>• 정원에서 1층 지붕으로 올라가는 소리</td></tr><tr id="282faa34-f4d8-81ee-8747-cf8cbb96c8f5"><td id="pps|" class="">E009</td><td id="S\aP" class="">한지은 회사 방문</td><td id="Y{`j" class="">증언 + CCTV</td><td id="dSCo" class="">Day 5</td><td id="e}O;" class="">VisionTech 사무실</td><td id="T{kx" class="">⭐⭐⭐⭐⭐</td><td id="T~xk" class="">한지은</td><td id="Ds=?" class="">동기 확정 (유언장 정보 획득)</td><td id="nrKH" class="">• 토요일 10:20 방문<br/>• 김수현 목격: &quot;급하게 갔어요&quot;<br/>• 회의실 복도에서 대기<br/>• 피해자-박준영 대화 엿듣기<br/>• &quot;월요일 10시 유언장, 회사 기부&quot;<br/>• → 범행 동기 확정!</td></tr><tr id="282faa34-f4d8-8184-bd66-f5e5e3d29521"><td id="pps|" class="">E010</td><td id="S\aP" class="">넷플릭스 기록</td><td id="Y{`j" class="">디지털 증거</td><td id="dSCo" class="">Day 3-4</td><td id="e}O;" class="">김수현/한지은 계정</td><td id="T{kx" class="">⭐⭐⭐</td><td id="T~xk" class="">김수현, 한지은</td><td id="Ds=?" class="">알리바이 검증</td><td id="nrKH" class="">• 김수현: 22:03-22:47 일시정지 (44분), IP 변경<br/>• 한지은: 모바일 데이터로 재생 (왜?)<br/>• 둘 다 의심스러우나 결정적이지 않음</td></tr></tbody></table><h2 id="282faa34-f4d8-81fb-adb0-c4ac056d064a" class="">증거물 타임라인</h2><table id="282faa34-f4d8-8184-b584-d9d579ec92b0" class="simple-table"><thead class="simple-table-header"><tr id="282faa34-f4d8-8156-8fd5-f1a67561c807"><th id="m]be" class="simple-table-header-color simple-table-header">Day</th><th id="et[N" class="simple-table-header-color simple-table-header">발견 증거</th><th id="h&gt;Dv" class="simple-table-header-color simple-table-header">영향</th></tr></thead><tbody><tr id="282faa34-f4d8-81ae-a137-d65737422eed"><td id="m]be" class="">Day 1</td><td id="et[N" class="">밀실 구조 (E001)</td><td id="h&gt;Dv" class="">자연사 추정</td></tr><tr id="282faa34-f4d8-8186-af42-c5d8929d287c"><td id="m]be" class="">Day 2</td><td id="et[N" class="">디곡신 + 와인 (E002)</td><td id="h&gt;Dv" class="">타살 확정!</td></tr><tr id="282faa34-f4d8-812b-adbd-feca476ee91a"><td id="m]be" class="">Day 3</td><td id="et[N" class="">넷플릭스 기록 (E010)</td><td id="h&gt;Dv" class="">김수현, 한지은 알리바이 의심</td></tr><tr id="282faa34-f4d8-8145-b406-f63f8365d87d"><td id="m]be" class="">Day 4</td><td id="et[N" class="">- 김수현 검색 (E004-1)<br/>- 김수현 이메일 (E004-2)<br/>- 김수현 결제 (E004-3)<br/>- 발자국 (E005)<br/>- 정원 소리 (E008)</td><td id="h&gt;Dv" class="">김수현 vs 한지은 팽팽</td></tr><tr id="282faa34-f4d8-815b-af51-f60b266764ca"><td id="m]be" class="">Day 5</td><td id="et[N" class="">- 낚싯줄 (E003) ⭐<br/>- 변기 디곡신 (E006) ⭐<br/>- 태운 로프 (E007)<br/>- 한지은 회사 방문 (E009) ⭐</td><td id="h&gt;Dv" class="">한지은 유력! (55.2%)</td></tr></tbody></table><h2 id="282faa34-f4d8-8199-9415-cedeaaa182b8" class="">증거물 관련도</h2><table id="282faa34-f4d8-81bc-a29c-ea8f92ab0d25" class="simple-table"><thead class="simple-table-header"><tr id="282faa34-f4d8-811f-8623-fd211c67d98e"><th id=";VR=" class="simple-table-header-color simple-table-header">용의자</th><th id="EKK&gt;" class="simple-table-header-color simple-table-header">유리한 증거</th><th id="m^{n" class="simple-table-header-color simple-table-header">불리한 증거</th></tr></thead><tbody><tr id="282faa34-f4d8-811a-abb6-d3b2ae01ad47"><td id=";VR=" class="">김수현</td><td id="EKK&gt;" class="">- 넷플릭스 일부 기록<br/>- GPS 집</td><td id="m^{n" class="">- 검색 기록 (E004-1)<br/>- 이메일 (E004-2)<br/>- 해외 결제 (E004-3)<br/>- 44분 일시정지 (E010)</td></tr><tr id="282faa34-f4d8-8155-92fd-c137838059c5"><td id=";VR=" class="">박준영</td><td id="EKK&gt;" class="">- 알리바이 강함 (동반자 3명)<br/>- 차량 블랙박스</td><td id="m^{n" class="">- 5분 통화 (증언 엇갈림)<br/>- 낚시 경험</td></tr><tr id="282faa34-f4d8-81ec-b28c-ec9c6cfe3d03"><td id=";VR=" class=""><strong>한지은</strong></td><td id="EKK&gt;" class="">- 통화 기록 47분<br/>- 배달 주문</td><td id="m^{n" class="">- <strong>낚싯줄 (E003) ⭐</strong><br/>- <strong>발자국 일치 (E005) ⭐</strong><br/>- <strong>변기 디곡신 (E006) ⭐</strong><br/>- <strong>태운 로프 (E007)</strong><br/>- <strong>회사 방문 (E009) ⭐</strong><br/>- 정원 소리 (E008)<br/>- 넷플릭스 모바일 (E010)<br/>- 배달기사 불확실<br/>- 마트 18분 공백</td></tr></tbody></table></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

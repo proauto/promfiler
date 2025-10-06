@@ -74,8 +74,8 @@
         ]
       }
     ],
-    "closing": "첨부된 검색 기록과 이메일을 확인하세요. 보강 수사를 통해 해외 결제 내역도 확인 가능합니다.",
-    "hint": "보강 수사: 9/30 해외 결제 $300.00 추적 / 9/25 피해자 집 방문 기록 / 8월 낚시 체험 참가 확인"
+    "closing": "첨부된 검색 기록과 이메일을 확인하세요. "
+    
   },
   "attachments": [
     {
@@ -93,7 +93,6 @@
   ],
   "enhancedInvestigation": {
     "available": true,
-    "description": "9/30 해외 결제 $300.00 추적 (OVERSEAS PHARM) / 9/25 피해자 집 방문 기록 (스페어 키 사라짐!) / 8월 회사 야유회 낚시 체험",
     "tokenCost": 20,
     "additionalFiles": 3
   }

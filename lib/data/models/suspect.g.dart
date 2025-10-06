@@ -18,6 +18,12 @@ Suspect _$SuspectFromJson(Map<String, dynamic> json) => Suspect(
               ?.map((e) => e as String)
               .toList() ??
           [],
+      aiProbability: (json['aiProbability'] as num?)?.toDouble(),
+      discoveredEvidenceIds: (json['discoveredEvidenceIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      investigationNotes: json['investigationNotes'] as String?,
     );
 
 Map<String, dynamic> _$SuspectToJson(Suspect instance) => <String, dynamic>{
@@ -29,4 +35,7 @@ Map<String, dynamic> _$SuspectToJson(Suspect instance) => <String, dynamic>{
       'profileImagePath': instance.profileImagePath,
       'description': instance.description,
       'relatedEvidence': instance.relatedEvidence,
+      'aiProbability': instance.aiProbability,
+      'discoveredEvidenceIds': instance.discoveredEvidenceIds,
+      'investigationNotes': instance.investigationNotes,
     };

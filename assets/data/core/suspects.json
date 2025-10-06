@@ -8,7 +8,10 @@
       "age": 43,
       "profileImagePath": "assets/images/suspects/han_ji_eun.png",
       "description": "피해자 최민호의 전 부인. 5년 전 이혼했으며, 현재는 프리랜서 디자이너로 활동 중. 이혼 당시 재산 분할에서 불만을 표출했다는 증언이 있음.",
-      "relatedEvidence": ["E001", "E003", "E006", "E009"]
+      "relatedEvidence": ["E001", "E003", "E006", "E009"],
+      "aiProbability": 48.0,
+      "discoveredEvidenceIds": ["E001", "E003", "E006"],
+      "investigationNotes": null
     },
     {
       "id": "parkJunYoung",
@@ -18,7 +21,10 @@
       "age": 52,
       "profileImagePath": "assets/images/suspects/park_jun_young.png",
       "description": "피해자와 함께 VisionTech를 공동 창업한 절친한 친구. 현재 부사장으로 재직 중. 최근 회사 경영권 문제로 갈등이 있었다는 소문.",
-      "relatedEvidence": ["E002", "E005", "E010"]
+      "relatedEvidence": ["E002", "E005", "E010"],
+      "aiProbability": 32.0,
+      "discoveredEvidenceIds": ["E002", "E005"],
+      "investigationNotes": null
     },
     {
       "id": "kimSuHyun",
@@ -28,7 +34,10 @@
       "age": 31,
       "profileImagePath": "assets/images/suspects/kim_su_hyun.png",
       "description": "피해자의 비서실장. 3년 전 입사 후 빠르게 승진했으며, 피해자와 가까운 관계였다고 알려짐. 최근 이상한 행동이 목격되었다는 증언.",
-      "relatedEvidence": ["E004", "E007", "E011"]
+      "relatedEvidence": ["E004", "E007", "E011"],
+      "aiProbability": 20.0,
+      "discoveredEvidenceIds": ["E004", "E007"],
+      "investigationNotes": null
     }
   ]
 }

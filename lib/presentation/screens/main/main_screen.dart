@@ -11,6 +11,7 @@ import '../../providers/providers.dart';
 import '../emails/widgets/email_list_panel.dart';
 import '../emails/widgets/email_detail_panel.dart';
 import '../suspects/widgets/suspect_list_panel.dart';
+import '../suspects/suspect_detail_screen.dart';
 import '../evidences/widgets/evidence_list_panel.dart';
 import 'widgets/main_top_bar.dart';
 import 'widgets/main_icon_button.dart';
@@ -184,9 +185,12 @@ class _MainScreenState extends ConsumerState<MainScreen> {
                 ? SuspectListPanel(
                     onClose: () => setState(() => _showSuspectList = false),
                     onSuspectTap: (suspect) {
-                      // TODO: 용의자 상세 화면 (옵션)
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('${suspect.name} 선택됨')),
+                      // 용의자 상세 화면으로 이동
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SuspectDetailScreen(suspect: suspect),
+                        ),
                       );
                     },
                   )

@@ -7,9 +7,9 @@ import '../../../../core/constants/layout_constants.dart';
 import '../../../../data/models/email.dart';
 import '../../../providers/game_state_provider.dart';
 import '../../../providers/providers.dart';
+import '../../../providers/token_provider.dart';
 import 'email_header.dart';
 import 'attachment_list.dart';
-import 'enhanced_request_button.dart';
 
 /// 메일 상세 패널 (오버레이)
 ///
@@ -59,11 +59,11 @@ class _EmailDetailPanelState extends ConsumerState<EmailDetailPanel> {
     return Container(
       width: panelWidth,
       decoration: BoxDecoration(
-        color: AppTheme.backgroundColor,
+        color: AppTheme.gray22,
         border: Border(
           left: BorderSide(
-            color: AppTheme.primaryColor.withOpacity(0.3),
-            width: 2.0,
+            color: AppTheme.gray80.withOpacity(0.2),
+            width: 1.0,
           ),
         ),
         boxShadow: [
@@ -78,7 +78,12 @@ class _EmailDetailPanelState extends ConsumerState<EmailDetailPanel> {
         child: Column(
           children: [
             // 상단 헤더
-            _buildHeader(context),
+            _buildHeader(
+              context,
+              isEnhancedRequested: isEnhancedRequested,
+              hasEnhancedFiles: hasEnhancedFiles,
+              onEnhancedRequest: () => _requestEnhancedInvestigation(enhancedUseCase),
+            ),
 
             // 이메일 내용 (스크롤 가능)
             Expanded(
@@ -106,31 +111,44 @@ class _EmailDetailPanelState extends ConsumerState<EmailDetailPanel> {
                     const SizedBox(height: 24.0),
                   ],
 
-                  // 인사말
-                  if (email.body.greeting != null) ...[
-                    Text(
-                      email.body.greeting!,
-                      style: const TextStyle(
-                        color: AppTheme.textPrimary,
-                        fontSize: 14.0,
-                        height: 1.6,
-                      ),
+                  // 본문 박스 (회색 배경)
+                  Container(
+                    padding: const EdgeInsets.all(16.0),
+                    decoration: BoxDecoration(
+                      color: AppTheme.gray22,
+                      borderRadius: BorderRadius.circular(8.0),
                     ),
-                    const SizedBox(height: 16.0),
-                  ],
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // 인사말
+                        if (email.body.greeting != null) ...[
+                          Text(
+                            email.body.greeting!,
+                            style: const TextStyle(
+                              color: AppTheme.textPrimary,
+                              fontSize: 14.0,
+                              height: 1.6,
+                            ),
+                          ),
+                          const SizedBox(height: 16.0),
+                        ],
 
-                  // 본문 섹션들
-                  ...email.body.sections.map((section) => _buildSection(section)),
+                        // 본문 섹션들
+                        ...email.body.sections.map((section) => _buildSection(section)),
 
-                  const SizedBox(height: 16.0),
+                        const SizedBox(height: 16.0),
 
-                  // 마무리 인사
-                  Text(
-                    email.body.closing,
-                    style: const TextStyle(
-                      color: AppTheme.textPrimary,
-                      fontSize: 14.0,
-                      height: 1.6,
+                        // 마무리 인사
+                        Text(
+                          email.body.closing,
+                          style: const TextStyle(
+                            color: AppTheme.textPrimary,
+                            fontSize: 14.0,
+                            height: 1.6,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
 
@@ -150,27 +168,26 @@ class _EmailDetailPanelState extends ConsumerState<EmailDetailPanel> {
               ),
             ),
           ),
-
-          // 하단 보강수사 요청 버튼
-          EnhancedRequestButton(
-            email: email,
-            isRequested: isEnhancedRequested,
-            hasEnhancedFiles: hasEnhancedFiles,
-            onRequest: () => _requestEnhancedInvestigation(enhancedUseCase),
-          ),
         ],
         ),
       ),
     );
   }
 
-  /// 상단 헤더 (제목 + 닫기 버튼)
-  Widget _buildHeader(BuildContext context) {
+  /// 상단 헤더 (제목 + 닫기 버튼 + 보강수사 버튼)
+  Widget _buildHeader(
+    BuildContext context, {
+    required bool isEnhancedRequested,
+    required bool hasEnhancedFiles,
+    required VoidCallback onEnhancedRequest,
+  }) {
+    final tokenBalance = ref.watch(tokenProvider);
+    final requiredTokens = 30;
     return Container(
       height: LayoutConstants.topBarHeight(context),
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       decoration: BoxDecoration(
-        color: AppTheme.surfaceColor,
+        color: AppTheme.gray22,
         border: Border(
           bottom: BorderSide(
             color: AppTheme.textSecondary.withOpacity(0.2),
@@ -182,7 +199,7 @@ class _EmailDetailPanelState extends ConsumerState<EmailDetailPanel> {
         children: [
           // 뒤로가기 버튼
           IconButton(
-            icon: const Icon(Icons.arrow_back, color: AppTheme.primaryColor),
+            icon: const Icon(Icons.arrow_back, color: AppTheme.white),
             onPressed: widget.onClose,
             tooltip: '닫기',
           ),
@@ -199,19 +216,112 @@ class _EmailDetailPanelState extends ConsumerState<EmailDetailPanel> {
             ),
             overflow: TextOverflow.ellipsis,
           ),
+
+          const Spacer(),
+
+          // 보강수사 버튼
+          if (hasEnhancedFiles)
+            // 이미 파일 도착함
+            Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12.0,
+                vertical: 6.0,
+              ),
+              decoration: BoxDecoration(
+                color: AppTheme.successColor.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(4.0),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: const [
+                  Icon(
+                    Icons.check_circle,
+                    color: AppTheme.successColor,
+                    size: 16.0,
+                  ),
+                  SizedBox(width: 4.0),
+                  Text(
+                    '보강수사 완료',
+                    style: TextStyle(
+                      color: AppTheme.successColor,
+                      fontSize: 13.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            )
+          else if (isEnhancedRequested)
+            // 요청했지만 파일 아직 도착 안함
+            Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12.0,
+                vertical: 6.0,
+              ),
+              decoration: BoxDecoration(
+                color: AppTheme.gray22,
+                borderRadius: BorderRadius.circular(4.0),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: const [
+                  Icon(
+                    Icons.schedule,
+                    color: AppTheme.gray80,
+                    size: 16.0,
+                  ),
+                  SizedBox(width: 4.0),
+                  Text(
+                    '대기 중',
+                    style: TextStyle(
+                      color: AppTheme.gray80,
+                      fontSize: 13.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            )
+          else
+            // 요청 가능
+            ElevatedButton(
+              onPressed: tokenBalance >= requiredTokens ? onEnhancedRequest : null,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: tokenBalance >= requiredTokens
+                    ? AppTheme.gray22
+                    : AppTheme.gray22.withOpacity(0.5),
+                foregroundColor: AppTheme.white,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                  vertical: 6.0,
+                ),
+                minimumSize: Size.zero,
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(4.0),
+                ),
+              ),
+              child: Text(
+                '보강수사 요청 ($requiredTokens토큰)',
+                style: const TextStyle(
+                  fontSize: 13.0,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
         ],
       ),
     );
   }
 
-  /// 긴급 알림 위젯 (청록색 박스)
+  /// 긴급 알림 위젯 (회색 박스)
   Widget _buildUrgentNotice(String notice) {
     return Container(
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        color: AppTheme.tealColor.withOpacity(0.2),
+        color: AppTheme.gray22,
         border: Border.all(
-          color: AppTheme.tealColor,
+          color: AppTheme.gray80.withOpacity(0.3),
           width: 1.5,
         ),
         borderRadius: BorderRadius.circular(8.0),
@@ -221,7 +331,7 @@ class _EmailDetailPanelState extends ConsumerState<EmailDetailPanel> {
         children: [
           const Icon(
             Icons.info_outline,
-            color: AppTheme.tealColor,
+            color: AppTheme.gray80,
             size: 24.0,
           ),
           const SizedBox(width: 12.0),
@@ -236,16 +346,27 @@ class _EmailDetailPanelState extends ConsumerState<EmailDetailPanel> {
               ),
             ),
           ),
-          TextButton(
-            onPressed: () {
+          InkWell(
+            onTap: () {
               // TODO: 보강수사 상세 정보 표시
             },
-            child: const Text(
-              '자세히',
-              style: TextStyle(
-                color: AppTheme.textPrimary,
-                fontSize: 14.0,
-                fontWeight: FontWeight.w600,
+            borderRadius: BorderRadius.circular(4.0),
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 8.0,
+              ),
+              decoration: BoxDecoration(
+                color: AppTheme.gray80.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(4.0),
+              ),
+              child: const Text(
+                '자세히',
+                style: TextStyle(
+                  color: AppTheme.white,
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ),

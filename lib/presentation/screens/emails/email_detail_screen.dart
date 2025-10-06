@@ -158,14 +158,14 @@ class _EmailDetailScreenState extends ConsumerState<EmailDetailScreen> {
     );
   }
 
-  /// 긴급 알림 위젯 (청록색 박스)
+  /// 긴급 알림 위젯 (회색 박스)
   Widget _buildUrgentNotice(String notice) {
     return Container(
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        color: AppTheme.tealColor.withOpacity(0.2),
+        color: AppTheme.gray22,
         border: Border.all(
-          color: AppTheme.tealColor,
+          color: AppTheme.gray80.withOpacity(0.3),
           width: 1.5,
         ),
         borderRadius: BorderRadius.circular(8.0),
@@ -175,7 +175,7 @@ class _EmailDetailScreenState extends ConsumerState<EmailDetailScreen> {
         children: [
           const Icon(
             Icons.info_outline,
-            color: AppTheme.tealColor,
+            color: AppTheme.gray80,
             size: 24.0,
           ),
           const SizedBox(width: 12.0),

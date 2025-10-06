@@ -104,6 +104,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
                   iconType: 'folder',
                   label: '사건 파일',
                   onTap: _onFolderTap,
+                  isActive: false, // TODO: 사건파일 패널 구현 시 상태 연동
                 ),
 
                 SizedBox(height: LayoutConstants.iconSpacing(context)),
@@ -114,6 +115,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
                   label: '메일',
                   badgeCount: unreadEmailCount,
                   onTap: _onMailTap,
+                  isActive: _showEmailList || _selectedEmail != null,
                 ),
 
                 SizedBox(height: LayoutConstants.iconSpacing(context)),
@@ -123,6 +125,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
                   iconType: 'camera',
                   label: '증거',
                   onTap: _onCameraTap,
+                  isActive: false, // TODO: 증거 패널 구현 시 상태 연동
                 ),
               ],
             ),

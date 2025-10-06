@@ -8,6 +8,7 @@ class MainIconButton extends StatefulWidget {
   final String label;
   final VoidCallback onTap;
   final int? badgeCount; // 메일 뱃지용
+  final bool isActive; // 해당 화면이 열려있는지 여부
 
   const MainIconButton({
     super.key,
@@ -15,6 +16,7 @@ class MainIconButton extends StatefulWidget {
     required this.label,
     required this.onTap,
     this.badgeCount,
+    this.isActive = false,
   });
 
   @override
@@ -25,7 +27,7 @@ class _MainIconButtonState extends State<MainIconButton> {
   bool _isPressed = false;
 
   String get _iconPath {
-    final suffix = _isPressed ? 'clicked' : 'unclicked';
+    final suffix = (widget.isActive || _isPressed) ? 'clicked' : 'unclicked';
     return 'assets/images/icons/${widget.iconType}_icon_$suffix.png';
   }
 
@@ -57,7 +59,7 @@ class _MainIconButtonState extends State<MainIconButton> {
                   height: iconSize,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(iconSize * 0.15),
-                    boxShadow: _isPressed
+                    boxShadow: (widget.isActive || _isPressed)
                         ? []
                         : [
                             BoxShadow(

@@ -9,7 +9,7 @@ import '../../../../data/models/email.dart';
 /// - 발신자 이름
 /// - 이메일 제목
 /// - 첨부파일 개수
-/// - 읽지 않은 상태 강조
+/// - 읽지 않은 상태 강조 (불투명도로 구분)
 class EmailCard extends StatelessWidget {
   final Email email;
   final bool isRead;
@@ -24,6 +24,8 @@ class EmailCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final opacity = isRead ? AppTheme.readOpacity : AppTheme.unreadOpacity;
+
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(12.0),
@@ -31,13 +33,11 @@ class EmailCard extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 12.0),
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
-          color: AppTheme.surfaceColor,
+          color: AppTheme.surfaceColor.withOpacity(opacity),
           borderRadius: BorderRadius.circular(12.0),
           border: Border.all(
-            color: isRead
-                ? AppTheme.textSecondary.withOpacity(0.2)
-                : AppTheme.primaryColor.withOpacity(0.5),
-            width: isRead ? 1.0 : 2.0,
+            color: AppTheme.gray80.withOpacity(0.1),
+            width: 1.0,
           ),
         ),
         child: Row(
@@ -48,14 +48,12 @@ class EmailCard extends StatelessWidget {
               width: 48.0,
               height: 48.0,
               decoration: BoxDecoration(
-                color: isRead
-                    ? AppTheme.textSecondary.withOpacity(0.3)
-                    : AppTheme.primaryColor.withOpacity(0.3),
+                color: AppTheme.gray80.withOpacity(opacity),
                 borderRadius: BorderRadius.circular(24.0),
               ),
               child: Icon(
                 Icons.person,
-                color: isRead ? AppTheme.textSecondary : AppTheme.primaryColor,
+                color: AppTheme.gray22.withOpacity(opacity),
                 size: 28.0,
               ),
             ),
@@ -71,9 +69,9 @@ class EmailCard extends StatelessWidget {
                   Text(
                     email.sender.name,
                     style: TextStyle(
-                      color: isRead ? AppTheme.textSecondary : AppTheme.textPrimary,
+                      color: AppTheme.textPrimary.withOpacity(opacity),
                       fontSize: 16.0,
-                      fontWeight: isRead ? FontWeight.w600 : FontWeight.w700,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
 
@@ -83,9 +81,7 @@ class EmailCard extends StatelessWidget {
                   Text(
                     email.subject,
                     style: TextStyle(
-                      color: isRead
-                          ? AppTheme.textSecondary.withOpacity(0.8)
-                          : AppTheme.textSecondary,
+                      color: AppTheme.textSecondary.withOpacity(opacity),
                       fontSize: 14.0,
                       height: 1.4,
                     ),
@@ -103,15 +99,15 @@ class EmailCard extends StatelessWidget {
               Row(
                 children: [
                   Icon(
-                    Icons.attach_file,
-                    color: isRead ? AppTheme.textSecondary : AppTheme.primaryColor,
+                    Icons.link,
+                    color: AppTheme.textSecondary.withOpacity(opacity),
                     size: 18.0,
                   ),
                   const SizedBox(width: 4.0),
                   Text(
-                    '${email.attachmentCount}개',
+                    '첨부파일 ${email.attachmentCount}개',
                     style: TextStyle(
-                      color: isRead ? AppTheme.textSecondary : AppTheme.primaryColor,
+                      color: AppTheme.textSecondary.withOpacity(opacity),
                       fontSize: 13.0,
                       fontWeight: FontWeight.w600,
                     ),

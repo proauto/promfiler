@@ -69,10 +69,10 @@ class EnhancedRequestButton extends ConsumerWidget {
     if (isRequested) {
       return _buildStatusContainer(
         icon: Icons.schedule,
-        iconColor: AppTheme.warningColor,
+        iconColor: AppTheme.gray80,
         text: '보강수사 요청됨 (다음 날 도착 예정)',
-        textColor: AppTheme.warningColor,
-        backgroundColor: AppTheme.warningColor.withOpacity(0.1),
+        textColor: AppTheme.gray80,
+        backgroundColor: AppTheme.gray22,
       );
     }
 

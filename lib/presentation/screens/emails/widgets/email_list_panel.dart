@@ -38,11 +38,11 @@ class EmailListPanel extends ConsumerWidget {
     return Container(
       width: panelWidth,
       decoration: BoxDecoration(
-        color: AppTheme.backgroundColor,
+        color: AppTheme.gray22,
         border: Border(
           left: BorderSide(
-            color: AppTheme.primaryColor.withOpacity(0.3),
-            width: 2.0,
+            color: AppTheme.gray80.withOpacity(0.2),
+            width: 1.0,
           ),
         ),
         boxShadow: [
@@ -87,7 +87,7 @@ class EmailListPanel extends ConsumerWidget {
       height: LayoutConstants.topBarHeight(context),
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       decoration: BoxDecoration(
-        color: AppTheme.surfaceColor,
+        color: AppTheme.gray22,
         border: Border(
           bottom: BorderSide(
             color: AppTheme.textSecondary.withOpacity(0.2),
@@ -99,7 +99,7 @@ class EmailListPanel extends ConsumerWidget {
         children: [
           // 뒤로가기 버튼
           IconButton(
-            icon: const Icon(Icons.arrow_back, color: AppTheme.primaryColor),
+            icon: const Icon(Icons.arrow_back, color: AppTheme.white),
             onPressed: onClose,
             tooltip: '닫기',
           ),

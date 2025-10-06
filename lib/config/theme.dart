@@ -1,18 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+/// 앱 테마 (무채색 기반)
 class AppTheme {
-  // Dark Theme Colors (from design)
-  static const Color backgroundColor = Color(0xFF0A0E27);
-  static const Color surfaceColor = Color(0xFF1A1F3A);
-  static const Color primaryColor = Color(0xFF00D9FF);
-  static const Color accentColor = Color(0xFFFF6B9D);
-  static const Color textPrimary = Color(0xFFFFFFFF);
-  static const Color textSecondary = Color(0xFFB0B3C1);
-  static const Color successColor = Color(0xFF00E676);
-  static const Color warningColor = Color(0xFFFFAB00);
-  static const Color errorColor = Color(0xFFFF5252);
-  static const Color tealColor = Color(0xFF0D7377);  // 보강수사 박스 색상
+  // 무채색 팔레트
+  static const Color white = Color(0xFFFFFFFF);
+  static const Color black = Color(0xFF000000);
+  static const Color gray95 = Color(0xFFF2F2F2);
+  static const Color gray80 = Color(0xFFCCCCCC);
+  static const Color grayD9 = Color(0xFFD9D9D9);
+  static const Color gray22 = Color(0xFF222222);
+
+  // 배경/표면
+  static const Color backgroundColor = black;
+  static const Color surfaceColor = gray22;
+
+  // 텍스트
+  static const Color textPrimary = white;
+  static const Color textSecondary = gray80;
+
+  // 읽음/안읽음 구분 (불투명도)
+  static const double unreadOpacity = 1.0;
+  static const double readOpacity = 0.5;
+
+  // 강조색 (최소한으로만 사용)
+  static const Color primaryColor = Color(0xFF00D9FF); // AI, 링크용
+  static const Color accentColor = Color(0xFFFF6B9D);  // 긴급 알림용
+  static const Color successColor = Color(0xFF00E676); // 성공 메시지용
+  static const Color errorColor = Color(0xFFFF5252);   // 에러 메시지용
 
   static ThemeData get darkTheme {
     return ThemeData(
@@ -52,7 +67,7 @@ class AppTheme {
       // Card Theme
       cardTheme: const CardThemeData(
         color: surfaceColor,
-        elevation: 4,
+        elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
@@ -71,15 +86,15 @@ class AppTheme {
 
       // Icon Theme
       iconTheme: const IconThemeData(
-        color: primaryColor,
+        color: white,
         size: 24,
       ),
 
       // Elevated Button Theme
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: primaryColor,
-          foregroundColor: Colors.black,
+          backgroundColor: gray22,
+          foregroundColor: white,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),

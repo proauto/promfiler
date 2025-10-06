@@ -25,48 +25,28 @@ class EmailHeader extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // 중요도 및 긴급 표시
-        Row(
-          children: [
-            // 중요도 별
-            ...List.generate(
-              email.importance,
-              (index) => const Padding(
-                padding: EdgeInsets.only(right: 4.0),
-                child: Icon(
-                  Icons.star,
-                  color: AppTheme.warningColor,
-                  size: 16.0,
-                ),
+        // 긴급 표시
+        if (email.isUrgent == true) ...[
+          Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 8.0,
+              vertical: 4.0,
+            ),
+            decoration: BoxDecoration(
+              color: AppTheme.errorColor,
+              borderRadius: BorderRadius.circular(4.0),
+            ),
+            child: const Text(
+              '긴급',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12.0,
+                fontWeight: FontWeight.w700,
               ),
             ),
-
-            const SizedBox(width: 8.0),
-
-            // 긴급 뱃지
-            if (email.isUrgent == true)
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8.0,
-                  vertical: 4.0,
-                ),
-                decoration: BoxDecoration(
-                  color: AppTheme.errorColor,
-                  borderRadius: BorderRadius.circular(4.0),
-                ),
-                child: const Text(
-                  '긴급',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ),
-          ],
-        ),
-
-        const SizedBox(height: 16.0),
+          ),
+          const SizedBox(height: 16.0),
+        ],
 
         // 발신자 정보
         Row(
@@ -77,12 +57,12 @@ class EmailHeader extends StatelessWidget {
               width: 48.0,
               height: 48.0,
               decoration: BoxDecoration(
-                color: AppTheme.primaryColor.withOpacity(0.2),
+                color: AppTheme.gray80,
                 borderRadius: BorderRadius.circular(24.0),
               ),
               child: const Icon(
                 Icons.person,
-                color: AppTheme.primaryColor,
+                color: AppTheme.gray22,
                 size: 28.0,
               ),
             ),
@@ -124,17 +104,17 @@ class EmailHeader extends StatelessWidget {
                             vertical: 2.0,
                           ),
                           decoration: BoxDecoration(
-                            color: AppTheme.primaryColor.withOpacity(0.2),
+                            color: AppTheme.gray22,
                             borderRadius: BorderRadius.circular(4.0),
                             border: Border.all(
-                              color: AppTheme.primaryColor,
+                              color: AppTheme.gray80.withOpacity(0.5),
                               width: 1.0,
                             ),
                           ),
                           child: Text(
                             email.sender.badge!,
                             style: const TextStyle(
-                              color: AppTheme.primaryColor,
+                              color: AppTheme.gray80,
                               fontSize: 11.0,
                               fontWeight: FontWeight.w600,
                             ),
@@ -146,7 +126,7 @@ class EmailHeader extends StatelessWidget {
                         Text(
                           email.sender.title!,
                           style: const TextStyle(
-                            color: AppTheme.accentColor,
+                            color: AppTheme.gray80,
                             fontSize: 12.0,
                             fontWeight: FontWeight.w600,
                           ),

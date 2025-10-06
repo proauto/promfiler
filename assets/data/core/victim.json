@@ -1,0 +1,16 @@
+{
+  "victim": {
+    "id": "choiMinHo",
+    "name": "최민호",
+    "age": 55,
+    "occupation": "VisionTech 회장",
+    "profileImagePath": "assets/images/victim/choi_min_ho.png",
+    "description": "VisionTech의 창업자이자 회장. 박준영과 함께 20년 전 회사를 설립했으며, 국내 최고의 IT 기업으로 성장시켰다. 5년 전 한지은과 이혼했으며, 최근 유언장을 작성한 것으로 알려짐.",
+    "deathDate": "2024년 10월 27일 (일) 오전 9시 30분 추정",
+    "deathLocation": "자택 서재 (서울시 강남구)",
+    "causeOfDeath": "디곡신 중독으로 인한 심장마비 (검시 결과)",
+    "relatedEvidence": ["E001", "E002", "E008", "E012", "E013"],
+    "discoveredEvidenceIds": ["E001", "E002", "E008"],
+    "investigationNotes": null
+  }
+}

@@ -4,24 +4,30 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../config/theme.dart';
 import '../../../../core/constants/layout_constants.dart';
 import '../../../../data/models/suspect.dart';
+import '../../../../data/models/victim.dart';
 import '../../../providers/suspect_provider.dart';
+import '../../../providers/victim_provider.dart';
 import 'suspect_card.dart';
+import 'victim_card.dart';
 
 /// 사건파일 목록 패널 (오버레이)
 ///
-/// MainScreen 위에 표시되는 용의자 목록 패널
+/// MainScreen 위에 표시되는 피해자 및 용의자 목록 패널
 class SuspectListPanel extends ConsumerWidget {
   final VoidCallback onClose;
+  final Function(Victim) onVictimTap;
   final Function(Suspect) onSuspectTap;
 
   const SuspectListPanel({
     super.key,
     required this.onClose,
+    required this.onVictimTap,
     required this.onSuspectTap,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final victimAsync = ref.watch(victimProvider);
     final suspectsAsync = ref.watch(suspectsProvider);
 
     final screenWidth = MediaQuery.of(context).size.width;
@@ -52,10 +58,20 @@ class SuspectListPanel extends ConsumerWidget {
             // 상단 헤더
             _buildHeader(context),
 
-            // 용의자 목록
+            // 피해자 & 용의자 목록
             Expanded(
-              child: suspectsAsync.when(
-                data: (suspects) => _buildSuspectList(context, suspects),
+              child: victimAsync.when(
+                data: (victim) {
+                  return suspectsAsync.when(
+                    data: (suspects) => _buildContent(context, victim, suspects),
+                    loading: () => const Center(
+                      child: CircularProgressIndicator(
+                        color: AppTheme.primaryColor,
+                      ),
+                    ),
+                    error: (error, stack) => _buildErrorView(error),
+                  );
+                },
                 loading: () => const Center(
                   child: CircularProgressIndicator(
                     color: AppTheme.primaryColor,
@@ -128,27 +144,69 @@ class SuspectListPanel extends ConsumerWidget {
     );
   }
 
-  /// 용의자 목록 (2열 그리드)
-  Widget _buildSuspectList(
+  /// 피해자 + 용의자 컨텐츠
+  Widget _buildContent(
     BuildContext context,
+    Victim victim,
     List<Suspect> suspects,
   ) {
-    if (suspects.isEmpty) {
-      return _buildEmptyView();
-    }
-
-    return GridView.builder(
+    return SingleChildScrollView(
       padding: const EdgeInsets.all(24.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // 피해자 섹션
+          const Text(
+            '피해자',
+            style: TextStyle(
+              color: AppTheme.textPrimary,
+              fontSize: 18.0,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(height: 12.0),
+          VictimCard(
+            victim: victim,
+            onTap: () => onVictimTap(victim),
+          ),
+
+          const SizedBox(height: 32.0),
+
+          // 용의자 섹션
+          const Text(
+            '용의자',
+            style: TextStyle(
+              color: AppTheme.textPrimary,
+              fontSize: 18.0,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(height: 12.0),
+
+          // 용의자 그리드
+          if (suspects.isEmpty)
+            _buildEmptyView()
+          else
+            _buildSuspectGrid(suspects),
+        ],
+      ),
+    );
+  }
+
+  /// 용의자 그리드 (2열)
+  Widget _buildSuspectGrid(List<Suspect> suspects) {
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         mainAxisSpacing: 16.0,
         crossAxisSpacing: 16.0,
-        childAspectRatio: 1.8, // 카드 가로:세로 비율
+        childAspectRatio: 1.8,
       ),
       itemCount: suspects.length,
       itemBuilder: (context, index) {
         final suspect = suspects[index];
-
         return SuspectCard(
           suspect: suspect,
           onTap: () => onSuspectTap(suspect),

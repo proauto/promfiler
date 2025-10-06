@@ -1,0 +1,74 @@
+name: aiprofiler
+description: "AI 추리 게임 - 밤의 침입자"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State Management
+  flutter_riverpod: ^2.4.9
+  riverpod_annotation: ^2.3.3
+
+  # Local Storage
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  shared_preferences: ^2.2.2
+  path_provider: ^2.1.1
+
+  # UI Components
+  flutter_markdown: ^0.6.18
+  google_fonts: ^6.1.0
+  flutter_animate: ^4.3.0
+
+  # Utilities
+  intl: ^0.18.1
+  uuid: ^4.2.2
+  collection: ^1.18.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+  # Code Generation
+  riverpod_generator: ^2.3.9
+  build_runner: ^2.4.7
+  hive_generator: ^2.0.1
+  json_serializable: ^6.7.1
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    # Core
+    - assets/core/
+
+    # Data
+    - assets/data/
+    - assets/data/ai_templates/
+
+    # Day Emails & Attachments
+    - assets/day1/emails/
+    - assets/day1/attachments/
+    - assets/day2/emails/
+    - assets/day2/attachments/
+    - assets/day3/emails/
+    - assets/day3/attachments/
+    - assets/day4/emails/
+    - assets/day4/attachments/
+    - assets/day5/emails/
+    - assets/day5/attachments/
+
+    # Enhanced Investigation
+    - assets/enhanced/
+
+    # Images
+    - assets/images/
+    - assets/images/icons/
+    - assets/images/suspects/
+    - assets/images/evidence/

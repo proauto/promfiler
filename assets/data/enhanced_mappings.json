@@ -1,0 +1,37 @@
+{
+  "E02": {
+    "normal": [
+      "enhanced/e02_enhanced_01_garden_report.md",
+      "enhanced/e02_enhanced_02_roof_access.md",
+      "enhanced/e02_enhanced_03_neighbor_interview.md"
+    ],
+    "day5": []
+  },
+  "E05": {
+    "normal": [
+      "enhanced/e05_enhanced_02_witnesses_recheck.md",
+      "enhanced/e05_enhanced_03_delivery_driver.md"
+    ],
+    "day5": [
+      "enhanced/e05_5day_enhanced_04_gps_analysis.md"
+    ]
+  },
+  "E06": {
+    "normal": [],
+    "day5": [
+      "enhanced/e06_5day_enhanced_01_drug_family.md"
+    ]
+  },
+  "E07": {
+    "normal": [],
+    "day5": [
+      "enhanced/e07_5day_enhanced_01_final_warning.md"
+    ]
+  },
+  "E09": {
+    "normal": [],
+    "day5": [
+      "enhanced/e09_5day_enhanced_01_netflix_log.md"
+    ]
+  }
+}

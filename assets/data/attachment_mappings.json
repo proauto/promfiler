@@ -1,0 +1,21 @@
+{
+  "e01_attach_01": "day1/attachments/이미지_사건현장_e01_crime_scene_photo",
+  "e01_attach_02": "day1/attachments/e01_victim_profile_auto.md",
+  "e02_attach_01": "day1/attachments/e02_floor_plan.md",
+  "e02_attach_02": "day1/attachments/e02_lock_photos.md",
+  "e03_attach_01": "day1/attachments/e03_suspects_initial_auto.md",
+  "e04_attach_01": "day2/attachments/e04__autopsy_report.md",
+  "e07_attach_01": "day3/attachments/e07_embezzlement_details_auto.md",
+  "e09_attach_01": "day3/attachments/e09_comm_records_auto.md",
+  "e10_attach_01": "day4/attachments/e10_search_history_auto.md",
+  "e10_attach_02": "day4/attachments/e10_email_draft_auto.md",
+  "e10_attach_03": "day4/attachments/e10_fishing_experience.md",
+  "e11_attach_01": "day4/attachments/e11_footprint_analysis.md",
+  "e11_attach_02": "day4/attachments/e11_footprint_photos.md",
+  "e11_attach_03": "day4/attachments/e11_fiber_analysis.md",
+  "e13_attach_01": "day5/attachments/e13_fishing_line_analysis.md",
+  "e13_attach_02": "day5/attachments/e13_footprint_detail.jpg",
+  "e14_attach_01": "day5/attachments/e14_novel_manuscript.md",
+  "e14_attach_02": "day5/attachments/e14_gmail_recovery.md",
+  "e14_attach_03": "day5/attachments/e14_payment_receipt.md"
+}

@@ -5,7 +5,22 @@
       "Bash(git remote add:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(where flutter)",
+      "Bash(dir:*)",
+      "Bash(findstr:*)",
+      "Bash(powershell:*)",
+      "Bash(C:flutterbinflutter.bat --version)",
+      "Bash(\"/c/flutter/bin/flutter.bat\" --version)",
+      "Bash(flutter create:*)",
+      "Bash(curl:*)",
+      "Bash(git checkout:*)",
+      "Bash(magick:*)",
+      "Bash(flutter pub run build_runner build:*)",
+      "Bash(flutter build:*)",
+      "Bash(flutter analyze:*)",
+      "Bash(cat:*)",
+      "Bash(git rm:*)"
     ],
     "deny": [],
     "ask": []

@@ -3,11 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/constants/layout_constants.dart';
 import '../../../data/models/email.dart';
+import '../../../data/models/suspect.dart';
+import '../../../data/models/evidence.dart';
 import '../../providers/game_state_provider.dart';
 import '../../providers/email_provider.dart';
 import '../../providers/providers.dart';
 import '../emails/widgets/email_list_panel.dart';
 import '../emails/widgets/email_detail_panel.dart';
+import '../suspects/widgets/suspect_list_panel.dart';
+import '../evidences/widgets/evidence_list_panel.dart';
 import 'widgets/main_top_bar.dart';
 import 'widgets/main_icon_button.dart';
 import 'widgets/ai_prompt_bar.dart';
@@ -25,6 +29,8 @@ class _MainScreenState extends ConsumerState<MainScreen> {
   // 오버레이 패널 상태
   bool _showEmailList = false;
   Email? _selectedEmail;
+  bool _showSuspectList = false;
+  bool _showEvidenceList = false;
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +110,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
                   iconType: 'folder',
                   label: '사건 파일',
                   onTap: _onFolderTap,
-                  isActive: false, // TODO: 사건파일 패널 구현 시 상태 연동
+                  isActive: _showSuspectList,
                 ),
 
                 SizedBox(height: LayoutConstants.iconSpacing(context)),
@@ -125,7 +131,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
                   iconType: 'camera',
                   label: '증거',
                   onTap: _onCameraTap,
-                  isActive: false, // TODO: 증거 패널 구현 시 상태 연동
+                  isActive: _showEvidenceList,
                 ),
               ],
             ),
@@ -161,6 +167,50 @@ class _MainScreenState extends ConsumerState<MainScreen> {
                 ? EmailDetailPanel(
                     email: _selectedEmail!,
                     onClose: () => setState(() => _selectedEmail = null),
+                  )
+                : const SizedBox.shrink(),
+          ),
+
+          // 사건파일 패널 (오버레이 - 슬라이드 애니메이션)
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeOut,
+            right: _showSuspectList
+                ? 0
+                : -(MediaQuery.of(context).size.width - LayoutConstants.emailPanelLeftMargin(context)),
+            top: 0,
+            bottom: 0,
+            child: _showSuspectList
+                ? SuspectListPanel(
+                    onClose: () => setState(() => _showSuspectList = false),
+                    onSuspectTap: (suspect) {
+                      // TODO: 용의자 상세 화면 (옵션)
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('${suspect.name} 선택됨')),
+                      );
+                    },
+                  )
+                : const SizedBox.shrink(),
+          ),
+
+          // 증거 패널 (오버레이 - 슬라이드 애니메이션)
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeOut,
+            right: _showEvidenceList
+                ? 0
+                : -(MediaQuery.of(context).size.width - LayoutConstants.emailPanelLeftMargin(context)),
+            top: 0,
+            bottom: 0,
+            child: _showEvidenceList
+                ? EvidenceListPanel(
+                    onClose: () => setState(() => _showEvidenceList = false),
+                    onEvidenceTap: (evidence) {
+                      // TODO: 증거 상세 화면 (옵션)
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('${evidence.name} 선택됨')),
+                      );
+                    },
                   )
                 : const SizedBox.shrink(),
           ),
@@ -278,24 +328,30 @@ class _MainScreenState extends ConsumerState<MainScreen> {
   }
 
   void _onFolderTap() {
-    // TODO: 사건파일 화면으로 이동
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('사건파일 화면으로 이동합니다')),
-    );
+    setState(() {
+      _showSuspectList = true;
+      _showEmailList = false;
+      _selectedEmail = null;
+      _showEvidenceList = false;
+    });
   }
 
   void _onMailTap() {
     setState(() {
       _showEmailList = true;
-      _selectedEmail = null; // 메일 목록을 열 때는 상세 화면 닫기
+      _selectedEmail = null;
+      _showSuspectList = false;
+      _showEvidenceList = false;
     });
   }
 
   void _onCameraTap() {
-    // TODO: 증거 화면으로 이동
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('증거 화면으로 이동합니다')),
-    );
+    setState(() {
+      _showEvidenceList = true;
+      _showEmailList = false;
+      _selectedEmail = null;
+      _showSuspectList = false;
+    });
   }
 
   void _onAIPromptTap() {

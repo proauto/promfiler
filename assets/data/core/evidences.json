@@ -1,0 +1,94 @@
+{
+  "evidences": [
+    {
+      "id": "E001",
+      "name": "IMG_현장감식 (1).png",
+      "type": "image",
+      "imagePath": "assets/images/evidences/scene_1.png",
+      "description": "사무실 현장 감식 사진. 사망 추정 시각: 10월 27일 오후 6시~8시",
+      "day": 1,
+      "relatedSuspects": ["hanJiEun"]
+    },
+    {
+      "id": "E002",
+      "name": "재무 보고서",
+      "type": "document",
+      "imagePath": "assets/images/evidences/financial_report.png",
+      "description": "VisionTech 최근 3개월 재무 보고서. 횡령 의혹 관련 자료",
+      "day": 2,
+      "relatedSuspects": ["parkJunYoung"]
+    },
+    {
+      "id": "E003",
+      "name": "낚싯줄",
+      "type": "physical",
+      "imagePath": "assets/images/evidences/fishing_line.png",
+      "description": "사무실 정원에서 발견된 낚싯줄 조각. 미끄럼 매듭 흔적",
+      "day": 3,
+      "relatedSuspects": ["hanJiEun"]
+    },
+    {
+      "id": "E004",
+      "name": "검색 기록",
+      "type": "digital",
+      "imagePath": "assets/images/evidences/search_history.png",
+      "description": "김수현 PC 검색 기록. 디곡신, 심장마비 관련 검색",
+      "day": 4,
+      "relatedSuspects": ["kimSuHyun"]
+    },
+    {
+      "id": "E005",
+      "name": "CCTV 영상",
+      "type": "video",
+      "imagePath": "assets/images/evidences/cctv.png",
+      "description": "건물 입구 CCTV. 10월 27일 오후 6시~8시 출입 기록",
+      "day": 1,
+      "relatedSuspects": ["parkJunYoung", "kimSuHyun"]
+    },
+    {
+      "id": "E006",
+      "name": "변기 디곡신 1정",
+      "type": "physical",
+      "imagePath": "assets/images/evidences/digoxin.png",
+      "description": "한지은 집 압수수색에서 변기에서 발견된 디곡신 1정",
+      "day": 5,
+      "relatedSuspects": ["hanJiEun"]
+    },
+    {
+      "id": "E007",
+      "name": "이메일 \"실행\"",
+      "type": "digital",
+      "imagePath": "assets/images/evidences/email_execute.png",
+      "description": "김수현이 보낸 의심스러운 이메일. \"오늘 밤 실행하기로 했어\"",
+      "day": 4,
+      "relatedSuspects": ["kimSuHyun"]
+    },
+    {
+      "id": "E009",
+      "name": "회사 방문 기록",
+      "type": "document",
+      "imagePath": "assets/images/evidences/visit_log.png",
+      "description": "한지은이 10월 26일 토요일 오전 10:30에 회사 방문. 유언장 정보 엿듣기 추정",
+      "day": 5,
+      "relatedSuspects": ["hanJiEun"]
+    },
+    {
+      "id": "E010",
+      "name": "통화 기록",
+      "type": "digital",
+      "imagePath": "assets/images/evidences/call_log.png",
+      "description": "박준영과 피해자 간의 격한 통화 기록. 경영권 다툼 관련",
+      "day": 3,
+      "relatedSuspects": ["parkJunYoung"]
+    },
+    {
+      "id": "E011",
+      "name": "소설 원고 47페이지",
+      "type": "document",
+      "imagePath": "assets/images/evidences/novel_manuscript.png",
+      "description": "김수현의 소설 원고. 제목: '완벽한 밀실'. 모든 디지털 증거가 소설 작업이었음이 밝혀짐 (레드헤링)",
+      "day": 5,
+      "relatedSuspects": ["kimSuHyun"]
+    }
+  ]
+}

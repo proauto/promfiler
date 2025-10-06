@@ -29,6 +29,7 @@ dependencies:
   intl: ^0.18.1
   uuid: ^4.2.2
   collection: ^1.18.0
+  json_annotation: ^4.9.0
 
 dev_dependencies:
   flutter_test:
@@ -50,6 +51,7 @@ flutter:
 
     # Data
     - assets/data/
+    - assets/data/core/
     - assets/data/ai_templates/
 
     # Day Emails & Attachments
@@ -71,4 +73,4 @@ flutter:
     - assets/images/
     - assets/images/icons/
     - assets/images/suspects/
-    - assets/images/evidence/
+    - assets/images/evidences/

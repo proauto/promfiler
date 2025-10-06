@@ -1,74 +1,132 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../config/theme.dart';
-import '../../../data/models/suspect.dart';
-import '../../../data/models/evidence.dart';
-import '../../providers/evidence_provider.dart';
+import '../../../../config/theme.dart';
+import '../../../../core/constants/layout_constants.dart';
+import '../../../../data/models/suspect.dart';
+import '../../../../data/models/evidence.dart';
+import '../../../providers/evidence_provider.dart';
 
-/// 용의자 상세 화면
+/// 용의자 상세 패널 (오버레이)
 ///
-/// 용의자의 세부 정보, AI 분석 결과, 발견한 증거, 수사 노트를 표시
-class SuspectDetailScreen extends ConsumerWidget {
+/// MainScreen 위에 표시되는 용의자 상세 패널
+class SuspectDetailPanel extends ConsumerWidget {
   final Suspect suspect;
+  final VoidCallback onClose;
 
-  const SuspectDetailScreen({
+  const SuspectDetailPanel({
     super.key,
     required this.suspect,
+    required this.onClose,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      backgroundColor: AppTheme.backgroundColor,
-      appBar: AppBar(
-        backgroundColor: AppTheme.gray22,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: AppTheme.white),
-          onPressed: () => Navigator.pop(context),
+    final screenWidth = MediaQuery.of(context).size.width;
+    final leftMargin = LayoutConstants.emailPanelLeftMargin(context);
+    final panelWidth = screenWidth - leftMargin; // 왼쪽 아이콘 영역 제외
+
+    return Container(
+      width: panelWidth,
+      decoration: BoxDecoration(
+        color: AppTheme.gray22,
+        border: Border(
+          left: BorderSide(
+            color: AppTheme.gray80.withOpacity(0.2),
+            width: 1.0,
+          ),
         ),
-        title: const Text(
-          '용의자 상세',
-          style: TextStyle(
-            color: AppTheme.textPrimary,
-            fontSize: 20.0,
-            fontWeight: FontWeight.w700,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.5),
+            blurRadius: 20.0,
+            offset: const Offset(-5, 0),
+          ),
+        ],
+      ),
+      child: SafeArea(
+        child: Column(
+          children: [
+            // 상단 헤더
+            _buildHeader(context),
+
+            // 스크롤 가능한 내용
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // 상단 카드 (프로필 + AI 확률)
+                    Row(
+                      children: [
+                        // 프로필 카드
+                        Expanded(
+                          child: _buildProfileCard(),
+                        ),
+                        const SizedBox(width: 16.0),
+
+                        // AI 확률 카드
+                        Expanded(
+                          child: _buildAIProbabilityCard(),
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 24.0),
+
+                    // 발견한 증거 섹션
+                    _buildDiscoveredEvidenceSection(context, ref),
+
+                    const SizedBox(height: 24.0),
+
+                    // 수사 노트 섹션
+                    _buildInvestigationNotesSection(),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// 상단 헤더 (제목 + 닫기 버튼)
+  Widget _buildHeader(BuildContext context) {
+    return Container(
+      height: LayoutConstants.topBarHeight(context),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      decoration: BoxDecoration(
+        color: AppTheme.gray22,
+        border: Border(
+          bottom: BorderSide(
+            color: AppTheme.textSecondary.withOpacity(0.2),
+            width: 1.0,
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // 상단 카드 (프로필 + AI 확률)
-            Row(
-              children: [
-                // 프로필 카드
-                Expanded(
-                  child: _buildProfileCard(),
-                ),
-                const SizedBox(width: 16.0),
+      child: Row(
+        children: [
+          // 뒤로가기 버튼
+          IconButton(
+            icon: const Icon(Icons.arrow_back, color: AppTheme.white),
+            onPressed: onClose,
+            tooltip: '닫기',
+          ),
 
-                // AI 확률 카드
-                Expanded(
-                  child: _buildAIProbabilityCard(),
-                ),
-              ],
+          const SizedBox(width: 8.0),
+
+          // 제목
+          const Text(
+            '용의자 상세',
+            style: TextStyle(
+              color: AppTheme.textPrimary,
+              fontSize: 20.0,
+              fontWeight: FontWeight.w700,
             ),
-
-            const SizedBox(height: 24.0),
-
-            // 발견한 증거 섹션
-            _buildDiscoveredEvidenceSection(context, ref),
-
-            const SizedBox(height: 24.0),
-
-            // 수사 노트 섹션
-            _buildInvestigationNotesSection(),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

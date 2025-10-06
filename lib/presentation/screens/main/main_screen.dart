@@ -11,7 +11,7 @@ import '../../providers/providers.dart';
 import '../emails/widgets/email_list_panel.dart';
 import '../emails/widgets/email_detail_panel.dart';
 import '../suspects/widgets/suspect_list_panel.dart';
-import '../suspects/suspect_detail_screen.dart';
+import '../suspects/widgets/suspect_detail_panel.dart';
 import '../evidences/widgets/evidence_list_panel.dart';
 import 'widgets/main_top_bar.dart';
 import 'widgets/main_icon_button.dart';
@@ -31,6 +31,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
   bool _showEmailList = false;
   Email? _selectedEmail;
   bool _showSuspectList = false;
+  Suspect? _selectedSuspect;
   bool _showEvidenceList = false;
 
   @override
@@ -111,7 +112,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
                   iconType: 'folder',
                   label: '사건 파일',
                   onTap: _onFolderTap,
-                  isActive: _showSuspectList,
+                  isActive: _showSuspectList || _selectedSuspect != null,
                 ),
 
                 SizedBox(height: LayoutConstants.iconSpacing(context)),
@@ -172,27 +173,36 @@ class _MainScreenState extends ConsumerState<MainScreen> {
                 : const SizedBox.shrink(),
           ),
 
-          // 사건파일 패널 (오버레이 - 슬라이드 애니메이션)
+          // 사건파일 목록 패널 (오버레이 - 슬라이드 애니메이션)
           AnimatedPositioned(
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeOut,
-            right: _showSuspectList
+            right: (_showSuspectList && _selectedSuspect == null)
                 ? 0
                 : -(MediaQuery.of(context).size.width - LayoutConstants.emailPanelLeftMargin(context)),
             top: 0,
             bottom: 0,
-            child: _showSuspectList
+            child: _showSuspectList && _selectedSuspect == null
                 ? SuspectListPanel(
                     onClose: () => setState(() => _showSuspectList = false),
-                    onSuspectTap: (suspect) {
-                      // 용의자 상세 화면으로 이동
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SuspectDetailScreen(suspect: suspect),
-                        ),
-                      );
-                    },
+                    onSuspectTap: (suspect) => setState(() => _selectedSuspect = suspect),
+                  )
+                : const SizedBox.shrink(),
+          ),
+
+          // 사건파일 상세 패널 (오버레이 - 슬라이드 애니메이션)
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeOut,
+            right: _selectedSuspect != null
+                ? 0
+                : -(MediaQuery.of(context).size.width - LayoutConstants.emailPanelLeftMargin(context)),
+            top: 0,
+            bottom: 0,
+            child: _selectedSuspect != null
+                ? SuspectDetailPanel(
+                    suspect: _selectedSuspect!,
+                    onClose: () => setState(() => _selectedSuspect = null),
                   )
                 : const SizedBox.shrink(),
           ),
@@ -334,6 +344,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
   void _onFolderTap() {
     setState(() {
       _showSuspectList = true;
+      _selectedSuspect = null;
       _showEmailList = false;
       _selectedEmail = null;
       _showEvidenceList = false;
@@ -345,6 +356,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
       _showEmailList = true;
       _selectedEmail = null;
       _showSuspectList = false;
+      _selectedSuspect = null;
       _showEvidenceList = false;
     });
   }
@@ -355,6 +367,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
       _showEmailList = false;
       _selectedEmail = null;
       _showSuspectList = false;
+      _selectedSuspect = null;
     });
   }
 

@@ -144,69 +144,36 @@ class SuspectListPanel extends ConsumerWidget {
     );
   }
 
-  /// 피해자 + 용의자 컨텐츠
+  /// 피해자 + 용의자 컨텐츠 (2x2 그리드)
   Widget _buildContent(
     BuildContext context,
     Victim victim,
     List<Suspect> suspects,
   ) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(24.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // 피해자 섹션
-          const Text(
-            '피해자',
-            style: TextStyle(
-              color: AppTheme.textPrimary,
-              fontSize: 18.0,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          const SizedBox(height: 12.0),
-          VictimCard(
-            victim: victim,
-            onTap: () => onVictimTap(victim),
-          ),
+    if (suspects.isEmpty) {
+      return _buildEmptyView();
+    }
 
-          const SizedBox(height: 32.0),
-
-          // 용의자 섹션
-          const Text(
-            '용의자',
-            style: TextStyle(
-              color: AppTheme.textPrimary,
-              fontSize: 18.0,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          const SizedBox(height: 12.0),
-
-          // 용의자 그리드
-          if (suspects.isEmpty)
-            _buildEmptyView()
-          else
-            _buildSuspectGrid(suspects),
-        ],
-      ),
-    );
-  }
-
-  /// 용의자 그리드 (2열)
-  Widget _buildSuspectGrid(List<Suspect> suspects) {
     return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
+      padding: const EdgeInsets.all(24.0),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         mainAxisSpacing: 16.0,
         crossAxisSpacing: 16.0,
         childAspectRatio: 1.8,
       ),
-      itemCount: suspects.length,
+      itemCount: 1 + suspects.length, // 피해자 1명 + 용의자 3명 = 4명
       itemBuilder: (context, index) {
-        final suspect = suspects[index];
+        // 첫 번째 아이템은 피해자
+        if (index == 0) {
+          return VictimCard(
+            victim: victim,
+            onTap: () => onVictimTap(victim),
+          );
+        }
+
+        // 나머지는 용의자
+        final suspect = suspects[index - 1];
         return SuspectCard(
           suspect: suspect,
           onTap: () => onSuspectTap(suspect),

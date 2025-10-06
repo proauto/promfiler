@@ -41,14 +41,14 @@ class VictimCard extends StatelessWidget {
           children: [
             // 프로필 사진 (원형)
             Container(
-              width: 100.0,
-              height: 100.0,
+              width: 80.0,
+              height: 80.0,
               decoration: BoxDecoration(
                 color: AppTheme.gray80,
                 shape: BoxShape.circle,
                 border: Border.all(
                   color: AppTheme.errorColor.withOpacity(0.5),
-                  width: 3.0,
+                  width: 2.0,
                 ),
               ),
               child: victim.profileImagePath != null
@@ -59,7 +59,7 @@ class VictimCard extends StatelessWidget {
                         errorBuilder: (context, error, stackTrace) {
                           return const Icon(
                             Icons.person,
-                            size: 50.0,
+                            size: 40.0,
                             color: AppTheme.gray22,
                           );
                         },
@@ -67,12 +67,12 @@ class VictimCard extends StatelessWidget {
                     )
                   : const Icon(
                       Icons.person,
-                      size: 50.0,
+                      size: 40.0,
                       color: AppTheme.gray22,
                     ),
             ),
 
-            const SizedBox(width: 24.0),
+            const SizedBox(width: 20.0),
 
             // 피해자 정보
             Expanded(
@@ -106,7 +106,7 @@ class VictimCard extends StatelessWidget {
                     victim.name,
                     style: const TextStyle(
                       color: AppTheme.textPrimary,
-                      fontSize: 24.0,
+                      fontSize: 20.0,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -115,57 +115,11 @@ class VictimCard extends StatelessWidget {
 
                   // 직업
                   Text(
-                    '${victim.occupation} (${victim.age}세)',
+                    '직업 : ${victim.occupation} (${victim.age}세)',
                     style: const TextStyle(
                       color: AppTheme.textSecondary,
-                      fontSize: 16.0,
+                      fontSize: 14.0,
                     ),
-                  ),
-
-                  const SizedBox(height: 12.0),
-
-                  // 사망 일시
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.calendar_today,
-                        size: 14.0,
-                        color: AppTheme.textSecondary,
-                      ),
-                      const SizedBox(width: 6.0),
-                      Expanded(
-                        child: Text(
-                          victim.deathDate,
-                          style: const TextStyle(
-                            color: AppTheme.textSecondary,
-                            fontSize: 14.0,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  const SizedBox(height: 6.0),
-
-                  // 사망 원인
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.warning_amber,
-                        size: 14.0,
-                        color: AppTheme.errorColor,
-                      ),
-                      const SizedBox(width: 6.0),
-                      Expanded(
-                        child: Text(
-                          victim.causeOfDeath,
-                          style: const TextStyle(
-                            color: AppTheme.textSecondary,
-                            fontSize: 14.0,
-                          ),
-                        ),
-                      ),
-                    ],
                   ),
                 ],
               ),
